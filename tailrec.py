@@ -1,3 +1,4 @@
+# type: ignore
 from typing import Callable, ParamSpec, TypeVar, Generic, NoReturn
 
 P = ParamSpec("P")
@@ -7,7 +8,7 @@ T = TypeVar("T")
 class Recur(BaseException, Generic[P, T]):
     f: Callable[P, T]
 
-    def __init__(self, f: Callable[P, T], args: P.args, kwargs: P.kwargs): # type: ignore
+    def __init__(self, f: Callable[P, T], args: P.args, kwargs: P.kwargs):
         super().__init__()
         self.f = f.f if isinstance(f, Recurrent) else f
         self.args = args

@@ -1,5 +1,4 @@
-
-def twoSum(nums, target):
+def twoSum(nums: list[int], target: int) -> list[int] | None:
     """
     Given an array of integers, find two numbers such that they add
     up to a specific target number
@@ -9,16 +8,15 @@ def twoSum(nums, target):
     """
 
     # Cache the all of the numbers in the array
-    dict = {}
+    cache: dict[int, int] = {}
     for i in range(0, len(nums)):
-        dict[nums[i]] = i
+        cache[nums[i]] = i
 
     # Check if the expected sum - the current number is in the dictionary
     # of numbers, and the the two indexes are different
     for j in range(0, len(nums)):
         lookFor = target - nums[j]
-        if lookFor in dict and dict[lookFor] != j:
-            return [j+1, dict[lookFor]+1]
+        if lookFor in cache and cache[lookFor] != j:
+            return [j + 1, cache[lookFor] + 1]
 
     return None
-
