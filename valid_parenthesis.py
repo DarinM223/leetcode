@@ -1,7 +1,7 @@
 from typing import Literal
 
 
-class Solution(object):
+class Solution:
     def isValid(self, s: str) -> bool:
         opStack: list[Literal["(", "{", "["]] = []
 
