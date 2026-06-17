@@ -1,5 +1,6 @@
 # type: ignore
-from typing import Callable, ParamSpec, TypeVar, Generic, NoReturn
+from typing import Callable, ParamSpec, TypeVar, Generic, NoReturn, Generator
+import types
 
 P = ParamSpec("P")
 T = TypeVar("T")
@@ -55,4 +56,17 @@ def trampoline[**P, T](
     v = f(*args, **kwargs)
     while callable(v):
         v = v()
-    return v  # type: ignore
+    return v
+
+
+type _Generatable[T] = T | Generator[_Generatable[T], None, None]
+type Generatable[T] = Generator[_Generatable[T], None, None]
+
+
+def trampoline_generator[**P, T](
+    f: Callable[P, Generatable[T]], *args: P.args, **kwargs: P.kwargs
+) -> T:
+    g = f(*args, **kwargs)
+    while isinstance(g, types.GeneratorType):
+        g = next(g)
+    return g

@@ -47,7 +47,7 @@ class Trie:
         while len(currentWord) > 0:
             ch = currentWord[0]
 
-            if not ch in node.children:
+            if ch not in node.children:
                 node.children[ch] = TrieNode(ch)
 
             node = node.children[ch]
@@ -66,7 +66,7 @@ class Trie:
         while len(currentWord) > 0:
             ch = currentWord[0]
 
-            if not ch in node.children:
+            if ch not in node.children:
                 return False
 
             node = node.children[ch]
@@ -85,7 +85,7 @@ class Trie:
         while len(currentWord) > 0:
             ch = currentWord[0]
 
-            if not ch in node.children:
+            if ch not in node.children:
                 return False
 
             node = node.children[ch]
